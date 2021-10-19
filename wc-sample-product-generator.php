@@ -2,7 +2,7 @@
 /**
  * wc-sample-product-generator.php
  *
- * Copyright (c) 2014 "kento" Karim Rahimpur www.itthinx.com
+
  *
  * This code is released under the GNU General Public License.
  * See COPYRIGHT.txt and LICENSE.txt.
@@ -14,25 +14,23 @@
  *
  * This header and all notices must be kept intact.
  *
- * @author itthinx
+ * @author McLaughing
  * @package wc-sample-product-generator
  * @since 1.0.0
  *
  * Plugin Name: WooCommerce Product Generator
- * Plugin URI: http://www.itthinx.com/
+ * Plugin URI: 
  * Description: A sample product generator for WooCommerce.
- * Version: 1.2.0
- * Author: itthinx
- * Author URI: http://www.itthinx.com
- * Donate-Link: http://www.itthinx.com
+ * Version: 1.0.0
+ * Author: McLaughing
  * License: GPLv3
  * WC requires at least: 3.0
  * WC tested up to: 5.1
  */
 
 define( 'WOOPROGEN_PLUGIN_VERSION', '1.2.0' );
-define( 'WOOPROGEN_PLUGIN_DOMAIN', 'woocommerce-product-generator' );
-define( 'WOOPROGEN_PLUGIN_URL', WP_PLUGIN_URL . '/woocommerce-product-generator' );
+define( 'WOOPROGEN_PLUGIN_DOMAIN', 'wc-sample-product-generator' );
+define( 'WOOPROGEN_PLUGIN_URL', WP_PLUGIN_URL . '/wc-sample-product-generator' );
 
 /**
  * Product Generator.
@@ -651,8 +649,8 @@ Vehicles';
 				if ( $limit < 0 ) {
 					$limit = self::DEFAULT_LIMIT;
 				}
-				delete_option( 'woocommerce-product-generator-limit' );
-				add_option( 'woocommerce-product-generator-limit', $limit, null, 'no' );
+				delete_option( 'wc-sample-product-generator-limit' );
+				add_option( 'wc-sample-product-generator-limit', $limit, null, 'no' );
 
 				if ( $per_run < 0 ) {
 					$per_run = self::DEFAULT_PER_RUN;
@@ -660,14 +658,14 @@ Vehicles';
 				if ( $per_run > self::MAX_PER_RUN ) {
 					$per_run = self::MAX_PER_RUN;
 				}
-				delete_option( 'woocommerce-product-generator-per-run' );
-				add_option( 'woocommerce-product-generator-per-run', $per_run, null, 'no' );
+				delete_option( 'wc-sample-product-generator-per-run' );
+				add_option( 'wc-sample-product-generator-per-run', $per_run, null, 'no' );
 
-				delete_option( 'woocommerce-product-generator-titles' );
-				add_option( 'woocommerce-product-generator-title', $titles, null, 'no' );
+				delete_option( 'wc-sample-product-generator-titles' );
+				add_option( 'wc-sample-product-generator-title', $titles, null, 'no' );
 
-				delete_option( 'woocommerce-product-generator-contents' );
-				add_option( 'woocommerce-product-generator-contents', $contents, null, 'no' );
+				delete_option( 'wc-sample-product-generator-contents' );
+				add_option( 'wc-sample-product-generator-contents', $contents, null, 'no' );
 			} else if ( isset( $_POST['action'] ) && ( $_POST['action'] == 'generate' ) && wp_verify_nonce( $_POST['product-generate'], 'admin' ) ) {
 				$max = isset( $_POST['max'] ) ? intval( $_POST['max'] ) : 0;
 				if ( $max > 0 ) {
@@ -676,23 +674,23 @@ Vehicles';
 					}
 				}
 			} else if ( isset( $_POST['action'] ) && ( $_POST['action'] == 'reset' ) && wp_verify_nonce( $_POST['product-generator-reset'], 'admin' ) ) {
-				delete_option( 'woocommerce-product-generator-limit' );
-				add_option( 'woocommerce-product-generator-limit', self::DEFAULT_LIMIT, null, 'no' );
+				delete_option( 'wc-sample-product-generator-limit' );
+				add_option( 'wc-sample-product-generator-limit', self::DEFAULT_LIMIT, null, 'no' );
 
-				delete_option( 'woocommerce-product-generator-per-run' );
-				add_option( 'woocommerce-product-generator-per-run', self::DEFAULT_PER_RUN, null, 'no' );
+				delete_option( 'wc-sample-product-generator-per-run' );
+				add_option( 'wc-sample-product-generator-per-run', self::DEFAULT_PER_RUN, null, 'no' );
 
-				delete_option( 'woocommerce-product-generator-titles' );
-				add_option( 'woocommerce-product-generator-title', self::DEFAULT_TITLES, null, 'no' );
+				delete_option( 'wc-sample-product-generator-titles' );
+				add_option( 'wc-sample-product-generator-title', self::DEFAULT_TITLES, null, 'no' );
 
-				delete_option( 'woocommerce-product-generator-contents' );
-				add_option( 'woocommerce-product-generator-contents', self::DEFAULT_CONTENTS, null, 'no' );
+				delete_option( 'wc-sample-product-generator-contents' );
+				add_option( 'wc-sample-product-generator-contents', self::DEFAULT_CONTENTS, null, 'no' );
 			}
 
-			$limit    = get_option( 'woocommerce-product-generator-limit', self::DEFAULT_LIMIT );
-			$per_run  = get_option( 'woocommerce-product-generator-per-run', self::DEFAULT_PER_RUN );
-			$titles   = stripslashes( get_option( 'woocommerce-product-generator-titles', self::DEFAULT_TITLES ) );
-			$contents = stripslashes( get_option( 'woocommerce-product-generator-contents', self::DEFAULT_CONTENTS ) );
+			$limit    = get_option( 'wc-sample-product-generator-limit', self::DEFAULT_LIMIT );
+			$per_run  = get_option( 'wc-sample-product-generator-per-run', self::DEFAULT_PER_RUN );
+			$titles   = stripslashes( get_option( 'wc-sample-product-generator-titles', self::DEFAULT_TITLES ) );
+			$contents = stripslashes( get_option( 'wc-sample-product-generator-contents', self::DEFAULT_CONTENTS ) );
 
 			$titles = explode( "\n", $titles );
 			sort( $titles );
@@ -871,7 +869,7 @@ Vehicles';
 	 * Product generation cycle.
 	 */
 	public static function run( $n = self::MAX_PER_RUN ) {
-		$limit = intval( get_option( 'woocommerce-product-generator-limit', self::DEFAULT_LIMIT ) );
+		$limit = intval( get_option( 'wc-sample-product-generator-limit', self::DEFAULT_LIMIT ) );
 		$n_products = self::get_product_count();
 		if ( $n_products < $limit ) {
 			$n = min( $n, $limit - $n_products );
@@ -1045,7 +1043,7 @@ Vehicles';
 	 */
 	public static function get_excerpt( $n_lines = 3, $contents = null ) {
 		if ( $contents === null ) {
-			$contents = trim( stripslashes( get_option( 'woocommerce-product-generator-contents', self::DEFAULT_CONTENTS ) ) );
+			$contents = trim( stripslashes( get_option( 'wc-sample-product-generator-contents', self::DEFAULT_CONTENTS ) ) );
 		} else {
 			$contents = str_ireplace( '</p>', "\n", $contents );
 			$contents = str_ireplace( '<p>', '', $contents );
@@ -1071,7 +1069,7 @@ Vehicles';
 	 * @return string
 	 */
 	public static function get_content( $n_lines = 10 ) {
-		$contents = trim( stripslashes( get_option( 'woocommerce-product-generator-contents', self::DEFAULT_CONTENTS ) ) );
+		$contents = trim( stripslashes( get_option( 'wc-sample-product-generator-contents', self::DEFAULT_CONTENTS ) ) );
 		$contents = explode( "\n", $contents );
 		$content = array();
 		$n = count( $contents );
@@ -1140,7 +1138,7 @@ Vehicles';
 
 	/**
 	 * Returns true if WooCommerce is active.
-	 * @return boolean true if WooCommerce is active
+	 * @return boolean true if WooCommerce is active 
 	 */
 	private static function woocommerce_is_active() {
 		$active_plugins = get_option( 'active_plugins', array() );
@@ -1152,4 +1150,4 @@ Vehicles';
 		return in_array( 'woocommerce/woocommerce.php', $active_plugins ); 
 	}
 }
-WooCommerce_Product_Generator::init();
+Wc_Sample_Product_Generator::init();
